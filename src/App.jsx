@@ -1,4 +1,4 @@
-import css from './index.css'
+import './index.css'
 import { forTrendFilms } from 'trendingFilmsApi'
 import { forFilmSearch } from './allFilmsApi'
 import React from 'react'
@@ -12,7 +12,7 @@ import { useEffect } from 'react'
 
 const App = () => {
     const [trendingFilms, setTrendingFilms] = useState([])
-    const [page, setPage] = useState(1)
+    const [page] = useState(1)
     const [searchFilms, setSearchFilms] = useState([])
     const [query, setQuery] = useState('')
     const navigate = useNavigate()
@@ -20,10 +20,6 @@ const App = () => {
     useEffect(() => {
         getTrendingFilmsFunction()
     }, [])
-
-    useEffect(() => {
-        getSearchFilmFunction()
-    }, [query])
 
     const submitFunction = async e => {
         e.preventDefault()
@@ -44,13 +40,16 @@ const App = () => {
         return apiDatas.results
     }
 
-    const getSearchFilmFunction = async () => {
-        const apiDatas = await forFilmSearch(query, page)
-        setSearchFilms(() => {
+    useEffect(() => {
+        const getSearchFilmFunction = async () => {
+            const apiDatas = await forFilmSearch(query, page)
+            setSearchFilms(() => {
+                return apiDatas.results
+            })
             return apiDatas.results
-        })
-        return apiDatas.results
-    }
+        }
+        getSearchFilmFunction()
+    }, [query, page])
 
     const filmDetailsFunction = e => {
         console.log(e)
