@@ -52,13 +52,29 @@ const App = () => {
         return apiDatas.results
     }
 
+    const filmDetailsFunction = e => {
+        console.log(e)
+    }
+
     return (
         <>
-            <button onClick={getTrendingFilmsFunction}>click</button>
+            <div style={{ marginTop: '20px' }}></div>
             <Header submitFunction={submitFunction}></Header>
             <Routes>
+                <Route
+                    path="/react-hw-05-kino-poisk"
+                    element={<Home api={trendingFilms} />}
+                />
                 <Route path="/" element={<Home api={trendingFilms} />} />
-                <Route path="/movies" element={<Movies api={searchFilms} />} />
+                <Route
+                    path="/movies"
+                    element={
+                        <Movies
+                            api={searchFilms}
+                            onClick={filmDetailsFunction}
+                        />
+                    }
+                />
                 <Route path="/about" element={<AboutUs />} />
             </Routes>
         </>
