@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/react-hw-05-kino-poisk/static/css/main.3cd40ae3.css",
+    "main.js": "/react-hw-05-kino-poisk/static/js/main.0436ef9a.js",
+    "index.html": "/react-hw-05-kino-poisk/index.html",
+    "main.3cd40ae3.css.map": "/react-hw-05-kino-poisk/static/css/main.3cd40ae3.css.map",
+    "main.0436ef9a.js.map": "/react-hw-05-kino-poisk/static/js/main.0436ef9a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3cd40ae3.css",
+    "static/js/main.0436ef9a.js"
+  ]
+}
