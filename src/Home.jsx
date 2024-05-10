@@ -1,7 +1,7 @@
 import React from 'react'
 import MovieItem from 'MovieItem'
 
-const Home = ({ api }) => {
+const Home = ({ api, onClick }) => {
     const styleUl = {
         display: 'flex',
         flexWrap: 'wrap',
@@ -12,7 +12,7 @@ const Home = ({ api }) => {
     return (
         <ul className="movieGallery" style={styleUl}>
             {api.map(elem => {
-                return <MovieItem data={elem}></MovieItem>
+                return <MovieItem data={elem} onClick={onClick}></MovieItem>
             })}
         </ul>
     )

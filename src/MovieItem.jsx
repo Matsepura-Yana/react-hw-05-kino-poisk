@@ -1,11 +1,13 @@
 import React from 'react'
 
-const MovieItem = ({ data }) => {
+const MovieItem = ({ data, onClick }) => {
     const styledParagraph = {
         margin: '3px 0px 20px 0px',
         fontSize: '20px',
         color: 'gold',
     }
+
+    const objectId = data.id
 
     return (
         <div
@@ -14,6 +16,7 @@ const MovieItem = ({ data }) => {
                 width: '266.9px',
                 margin: '10px 0px 0px 0px',
             }}
+            onClick={() => onClick(objectId)}
         >
             <img
                 style={

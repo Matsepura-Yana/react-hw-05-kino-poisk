@@ -10,9 +10,9 @@ const Movies = ({ api, onClick }) => {
         margin: '0px',
     }
     return (
-        <ul className="movieGallery" style={styleUl} onClick={onClick}>
+        <ul className="movieGallery" style={styleUl}>
             {api.map(elem => {
-                return <MovieItem data={elem}></MovieItem>
+                return <MovieItem data={elem} onClick={onClick}></MovieItem>
             })}
         </ul>
     )

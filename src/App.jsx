@@ -6,6 +6,7 @@ import Home from 'Home'
 import Header from 'Header'
 import Movies from 'Movies'
 import AboutUs from 'AboutUs'
+import MovieDetails from './MovieDetails'
 import { Route, Routes, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { useEffect } from 'react'
@@ -30,13 +31,12 @@ const App = () => {
 
         navigate('/movies')
     }
-    console.log(query)
+
     const getTrendingFilmsFunction = async () => {
         const apiDatas = await forTrendFilms()
         setTrendingFilms(() => {
             return apiDatas.results
         })
-        console.log(apiDatas.results)
         return apiDatas.results
     }
 
@@ -51,8 +51,8 @@ const App = () => {
         getSearchFilmFunction()
     }, [query, page])
 
-    const filmDetailsFunction = e => {
-        console.log(e)
+    const filmDetailsFunction = id => {
+        navigate(`/${id}`)
     }
 
     return (
@@ -61,10 +61,14 @@ const App = () => {
             <Header submitFunction={submitFunction}></Header>
             <Routes>
                 <Route
-                    path="/react-hw-05-kino-poisk"
-                    element={<Home api={trendingFilms} />}
+                    path="/"
+                    element={
+                        <Home
+                            api={trendingFilms}
+                            onClick={filmDetailsFunction}
+                        />
+                    }
                 />
-                <Route path="/" element={<Home api={trendingFilms} />} />
                 <Route
                     path="/movies"
                     element={
@@ -75,6 +79,7 @@ const App = () => {
                     }
                 />
                 <Route path="/about" element={<AboutUs />} />
+                <Route path={`/:id`} element={<MovieDetails />} />
             </Routes>
         </>
     )
