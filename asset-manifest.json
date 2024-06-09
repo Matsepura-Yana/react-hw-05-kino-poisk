@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/react-hw-05-kino-poisk/static/css/main.3cd40ae3.css",
-    "main.js": "/react-hw-05-kino-poisk/static/js/main.18a26875.js",
+    "main.js": "/react-hw-05-kino-poisk/static/js/main.ff51e05c.js",
     "index.html": "/react-hw-05-kino-poisk/index.html",
     "main.3cd40ae3.css.map": "/react-hw-05-kino-poisk/static/css/main.3cd40ae3.css.map",
-    "main.18a26875.js.map": "/react-hw-05-kino-poisk/static/js/main.18a26875.js.map"
+    "main.ff51e05c.js.map": "/react-hw-05-kino-poisk/static/js/main.ff51e05c.js.map"
   },
   "entrypoints": [
     "static/css/main.3cd40ae3.css",
-    "static/js/main.18a26875.js"
+    "static/js/main.ff51e05c.js"
   ]
 }
