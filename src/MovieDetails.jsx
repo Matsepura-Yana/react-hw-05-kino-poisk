@@ -1,15 +1,14 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { Outlet, useParams } from 'react-router-dom'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { forFilmSearchById } from './searchMovieByIdApi'
-import Reviews from 'Reviews'
-import { forFilmReviews } from 'reviewsApi'
+import { useNavigate } from 'react-router-dom'
 
 const MovieDetails = () => {
     const { id } = useParams()
     const [detailsById, setDetailsById] = useState(null)
-    const [reviews, setReviewes] = useState([])
+    const navigate = useNavigate()
 
     useEffect(() => {
         const getDetailsByIdFunction = async () => {
@@ -23,22 +22,21 @@ const MovieDetails = () => {
         getDetailsByIdFunction()
     }, [id])
 
-    useEffect(() => {
-        const getFilmReviews = async () => {
-            const apiDatas = await forFilmReviews(id)
-            setReviewes(() => {
-                return apiDatas.results
-            })
-            return apiDatas.results
-        }
-        getFilmReviews()
-    }, [id])
-
     const genres = []
 
     const allGenresFunction = () => {
         detailsById.genres.map(e => genres.push(e.name))
         return genres.join(', ')
+    }
+
+    const reviewsFunction = () => {
+        navigate('reviews')
+    }
+    const castFunction = () => {
+        navigate('cast')
+    }
+    const handleOnClick = () => {
+        navigate(-1)
     }
 
     const styledInfo = {
@@ -54,6 +52,7 @@ const MovieDetails = () => {
     return detailsById ? (
         <>
             <div>
+                <button onClick={handleOnClick}>Go back</button>
                 <div style={styledInfo}>
                     <img
                         src={`https://image.tmdb.org/t/p/w500${detailsById.backdrop_path}`}
@@ -111,10 +110,10 @@ const MovieDetails = () => {
                         </p>
                     </div>
                 </div>
+                <button onClick={reviewsFunction}>Reviews</button>
+                <button onClick={castFunction}>Cast</button>
             </div>
-            {reviews.map(elem => {
-                return <Reviews userDatas={elem}></Reviews>
-            })}
+            <Outlet />
         </>
     ) : (
         <h1>Not found</h1>

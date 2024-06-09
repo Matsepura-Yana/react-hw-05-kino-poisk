@@ -10,6 +10,8 @@ import MovieDetails from './MovieDetails'
 import { Route, Routes, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { useEffect } from 'react'
+import Cast from 'Cast'
+import Reviews from 'Reviews'
 
 const App = () => {
     const [trendingFilms, setTrendingFilms] = useState([])
@@ -79,7 +81,10 @@ const App = () => {
                     }
                 />
                 <Route path="/about" element={<AboutUs />} />
-                <Route path={`/:id`} element={<MovieDetails />} />
+                <Route path={`/:id`} element={<MovieDetails />}>
+                    <Route path="reviews" element={<Reviews />}></Route>
+                    <Route path="cast" element={<Cast />}></Route>
+                </Route>
             </Routes>
         </>
     )
