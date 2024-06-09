@@ -1,5 +1,10 @@
 import React from 'react'
-import { Outlet, useParams } from 'react-router-dom'
+import {
+    Outlet,
+    useLocation,
+    useParams,
+    useSearchParams,
+} from 'react-router-dom'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { forFilmSearchById } from './searchMovieByIdApi'
@@ -8,7 +13,31 @@ import { useNavigate } from 'react-router-dom'
 const MovieDetails = () => {
     const { id } = useParams()
     const [detailsById, setDetailsById] = useState(null)
+    const [inputValue, setInputValue] = useState('')
+    const [searchParams, setSearchParams] = useSearchParams()
+    const [query, setQuery] = useState('')
     const navigate = useNavigate()
+    const location = useLocation()
+
+    console.log(inputValue)
+
+    const handleBack = () => {
+        navigate(location.state)
+    }
+
+    useEffect(() => {
+        const searchQuery = searchParams.get('search')
+        const getSearchFilms = async () => {}
+        if (searchQuery) {
+            getSearchFilms()
+            setInputValue(searchQuery)
+            setQuery(searchQuery)
+        }
+    }, [searchParams])
+
+    useEffect(() => {
+        query && setSearchParams({ search: query })
+    }, [query, setSearchParams])
 
     useEffect(() => {
         const getDetailsByIdFunction = async () => {
@@ -35,9 +64,6 @@ const MovieDetails = () => {
     const castFunction = () => {
         navigate('cast')
     }
-    const handleOnClick = () => {
-        navigate(-1)
-    }
 
     const styledInfo = {
         display: 'grid',
@@ -52,7 +78,7 @@ const MovieDetails = () => {
     return detailsById ? (
         <>
             <div>
-                <button onClick={handleOnClick}>Go back</button>
+                <button onClick={handleBack}>Go back</button>
                 <div style={styledInfo}>
                     <img
                         src={`https://image.tmdb.org/t/p/w500${detailsById.backdrop_path}`}

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
@@ -73,6 +73,12 @@ const Header = ({ submitFunction }) => {
         height: '70px',
     }
 
+    const inputRef = useRef()
+
+    useEffect(() => {
+        inputRef.current.focus()
+    }, [])
+
     return (
         <header style={styleHeader}>
             <nav style={{ marginRight: '100px' }}>
@@ -99,6 +105,7 @@ const Header = ({ submitFunction }) => {
                     autoFocus
                     placeholder="Search films"
                     style={styleInput}
+                    ref={inputRef}
                 />
                 <button type="submit" className="button" style={styleBotton}>
                     <span className="button-label">
